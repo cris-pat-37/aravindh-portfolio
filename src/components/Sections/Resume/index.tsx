@@ -5,7 +5,7 @@ import { TimelineItem as TimelineItemType } from '../../../data/dataDef';
 
 import Section from '../../Layout/Section';
 import ResumeSection from './ResumeSection';
-import SkillGroup from './Skills';
+import   { SkillGroup}from './Skills';
 import TimelineItem from './TimelineItem';
 
 const Resume: FC = memo(() => {
