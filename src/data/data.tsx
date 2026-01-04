@@ -32,17 +32,17 @@ import {
   TimelineItem,
 } from './dataDef';
 
-/**
- * Page meta data
- */
+/* =======================
+   Page Meta
+======================= */
 export const homePageMeta: HomepageMeta = {
   title: 'Vishwapathi Aravindh | Portfolio',
   description: 'CSE Data Science student building automation and AI-powered systems',
 };
 
-/**
- * Section definition
- */
+/* =======================
+   Section IDs
+======================= */
 export const SectionId = {
   Hero: 'hero',
   About: 'about',
@@ -56,9 +56,9 @@ export const SectionId = {
 
 export type SectionId = (typeof SectionId)[keyof typeof SectionId];
 
-/**
- * Hero section
- */
+/* =======================
+   Hero
+======================= */
 export const heroData: Hero = {
   imageSrc: heroImage,
   name: 'Vishwapathi Aravindh',
@@ -67,8 +67,7 @@ export const heroData: Hero = {
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
         I am a <strong className="text-stone-100">CSE (Data Science) student</strong>{' '}
         building real-world{' '}
-        <strong className="text-stone-100">automation systems</strong> and AI-powered
-        workflows.
+        <strong className="text-stone-100">automation systems</strong> and AI-powered workflows.
       </p>
 
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
@@ -81,8 +80,8 @@ export const heroData: Hero = {
       </p>
 
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        I’m <strong className="text-stone-100">open to freelance work</strong> in
-        automation, web interfaces, and AI solutions.
+        I’m <strong className="text-stone-100">open to freelance work</strong> in automation,
+        web interfaces, and AI solutions.
       </p>
     </>
   ),
@@ -101,51 +100,27 @@ export const heroData: Hero = {
   ],
 };
 
-/**
- * About section
- */
+/* =======================
+   About
+======================= */
 export const aboutData: About = {
   profileImageSrc:
     'https://res.cloudinary.com/dudr6v8mi/image/upload/v1767516881/aravind.jpg_herupz.png',
   description:
     'CSE (Data Science) student focused on automation and AI-powered web applications. I build real products like AI call agents, dashboards, and workflow-based systems.',
   aboutItems: [
-    {
-      label: 'Location',
-      text: 'India',
-      Icon: MapIcon,
-    },
-    {
-      label: 'Degree',
-      text: 'B.Tech – CSE (Data Science)',
-      Icon: AcademicCapIcon,
-    },
-    {
-      label: 'Focus',
-      text: 'Automation & AI',
-      Icon: SparklesIcon,
-    },
-    {
-      label: 'Skills',
-      text: 'HTML, CSS, Tailwind, JavaScript, Python',
-      Icon: CodeBracketIcon,
-    },
-    {
-      label: 'Problem Solving',
-      text: 'DSA Practice',
-      Icon: ChartBarIcon,
-    },
-    {
-      label: 'Availability',
-      text: 'Freelance & Internships',
-      Icon: BuildingOffice2Icon,
-    },
+    {label: 'Location', text: 'India', Icon: MapIcon},
+    {label: 'Degree', text: 'B.Tech – CSE (Data Science)', Icon: AcademicCapIcon},
+    {label: 'Focus', text: 'Automation & AI', Icon: SparklesIcon},
+    {label: 'Skills', text: 'HTML, CSS, Tailwind, JavaScript, Python', Icon: CodeBracketIcon},
+    {label: 'Problem Solving', text: 'DSA Practice', Icon: ChartBarIcon},
+    {label: 'Availability', text: 'Freelance & Internships', Icon: BuildingOffice2Icon},
   ],
 };
 
-/**
- * Skills section
- */
+/* =======================
+   Skills
+======================= */
 export const skills: SkillGroup[] = [
   {
     name: 'Frontend',
@@ -165,9 +140,9 @@ export const skills: SkillGroup[] = [
   },
 ];
 
-/**
- * Portfolio
- */
+/* =======================
+   Portfolio
+======================= */
 export const portfolioItems: PortfolioItem[] = [
   {
     title: 'AutoBook AI',
@@ -189,110 +164,82 @@ export const portfolioItems: PortfolioItem[] = [
   },
 ];
 
-/**
- * Testimonials
- */
+/* =======================
+   Education
+======================= */
+export const education: TimelineItem[] = [
+  {
+    date: '2025 – 2029',
+    location: 'Aurora Deemed to be University',
+    title: 'B.Tech – CSE (Data Science)',
+    content: <p>Building automation systems and AI-powered applications.</p>,
+  },
+  {
+    date: '2023 – 2025',
+    location: 'Sri Surya Junior College',
+    title: 'Intermediate – PCM',
+    content: <p>Strong foundation in Physics, Chemistry & Mathematics.</p>,
+  },
+  {
+    date: '2022 – 2023',
+    location: 'Sri Sai Chaitanya High School',
+    title: '10th Grade',
+    content: <p>Completed secondary education with academic discipline.</p>,
+  },
+];
+
+/* =======================
+   Experience
+======================= */
+export const experience: TimelineItem[] = [
+  {
+    date: '2025 – Present',
+    location: 'Personal Projects & Freelance',
+    title: 'Frontend & Automation Developer',
+    content: (
+      <p>
+        Building frontend web apps and automation systems including AI call agents,
+        dashboards, and workflow-based solutions.
+      </p>
+    ),
+  },
+];
+
+/* =======================
+   Testimonials
+======================= */
 export const testimonial: TestimonialSection = {
   imageSrc: testimonialImage,
   testimonials: [
-    {
-      name: 'Hackathon Experience',
-      text: 'Participated in Telangana State Level Hackathon focused on AI automation.',
-      image: '',
-    },
-    {
-      name: 'IIIT Allahabad',
-      text: 'Out of Context 26 hackathon participant.',
-      image: '',
-    },
+    {name: 'Hackathon', text: 'Participated in Telangana State level hackathon.', image: ''},
+    {name: 'IIIT Allahabad', text: 'Out of Context 26 hackathon participant.', image: ''},
   ],
 };
 
-/**
- * Contact
- */
+/* =======================
+   Contact
+======================= */
 export const contact: ContactSection = {
   headerText: 'Get in touch',
   description: 'Open to freelance work, internships, and collaborations.',
   items: [
-    {
-      type: ContactType.Email,
-      text: 'vishwaphathiaravindh@gmail.com',
-    },
-    {
-      type: ContactType.Location,
-      text: 'Telangana, India',
-    },
+    {type: ContactType.Email, text: 'vishwaphathiaravindh@gmail.com'},
+    {type: ContactType.Location, text: 'Telangana, India'},
     {
       type: ContactType.LinkedIn,
       text: 'Vishwapathi Aravindh',
       href: 'https://www.linkedin.com/in/ash04931',
     },
-    {
-      type: ContactType.Phone,
-      text: '+919030706558',
-      href: 'tel:+919030706558',
-    },
+    {type: ContactType.Phone, text: '+919030706558', href: 'tel:+919030706558'},
   ],
 };
 
-/**
- * Social links
- */
+/* =======================
+   Social Links
+======================= */
 export const socialLinks: Social[] = [
   {label: 'Github', Icon: GithubIcon, href: ''},
   {label: 'LinkedIn', Icon: LinkedInIcon, href: 'https://www.linkedin.com/in/ash04931'},
   {label: 'Instagram', Icon: InstagramIcon, href: 'https://www.instagram.com/cris._pat/'},
   {label: 'Twitter', Icon: TwitterIcon, href: ''},
 ];
-/**
- * Education
- */
-export const education: TimelineItem[] = [
-  {
-    date: '2025 – 2029',
-    location: 'Aurora Deemed to be University',
-    title: 'B.Tech – Computer Science & Engineering (Data Science)',
-    content: (
-      <p>
-        Pursuing B.Tech in Computer Science with a specialization in Data Science.
-        Actively building automation systems, AI-powered web applications, and
-        strengthening problem-solving skills through continuous DSA practice.
-      </p>
-    ),
-  },
-  {
-    date: '2023 – 2025',
-    location: 'Sri Surya Junior College',
-    title: 'Intermediate (11th & 12th) – PCM Stream',
-    content: (
-      <p>
-        Focused on Physics, Chemistry, and Mathematics, developing strong analytical
-        and logical foundations for engineering studies.
-      </p>
-    ),
-  },
-  {
-    date: '2022 – 2023',
-    location: 'Sri Sai Chaitanya High School',
-    title: 'Secondary School (10th Grade)',
-    content: (
-      <p>
-        Completed secondary education with strong academic discipline and foundational
-        problem-solving skills.
-      </p>
-    ),
-  },
-];
-export {
-  aboutData,
-  contact,
-  education,
-  experience,
-  heroData,
-  homePageMeta,
-  portfolioItems,
-  skills,
-  socialLinks,
-  testimonial,
-};
