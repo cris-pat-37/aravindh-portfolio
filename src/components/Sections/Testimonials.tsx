@@ -3,7 +3,7 @@ import {FC, memo, UIEventHandler, useCallback, useEffect, useMemo, useRef, useSt
 
 import {isApple, isMobile} from '../../config';
 import {SectionId, testimonial} from '../../data/data';
-import {Testimonial} from '../../data/dataDef';
+import {Testimonial as TestimonialType} from '../../data/dataDef';
 import useInterval from '../../hooks/useInterval';
 import useWindow from '../../hooks/useWindow';
 import QuoteIcon from '../Icon/QuoteIcon';
@@ -18,7 +18,6 @@ const Testimonials: FC = memo(() => {
   const scrollContainer = useRef<HTMLDivElement>(null);
 
   const {width} = useWindow();
-
   const {imageSrc, testimonials} = testimonial;
 
   const resolveSrc = useMemo(() => {
@@ -40,23 +39,24 @@ const Testimonials: FC = memo(() => {
       const newIndex = Math.round(scrollContainer.current.scrollLeft / itemWidth.current);
       setActiveIndex(newIndex);
     }
-  }, [itemWidth, scrollValue]);
+  }, [scrollValue]);
 
   const setTestimonial = useCallback(
     (index: number) => () => {
-      if (scrollContainer !== null && scrollContainer.current !== null) {
+      if (scrollContainer.current) {
         scrollContainer.current.scrollLeft = itemWidth.current * index;
       }
     },
     [],
   );
+
   const next = useCallback(() => {
     if (activeIndex + 1 === testimonials.length) {
       setTestimonial(0)();
     } else {
       setTestimonial(activeIndex + 1)();
     }
-  }, [activeIndex, setTestimonial, testimonials.length]);
+  }, [activeIndex, testimonials.length, setTestimonial]);
 
   const handleScroll = useCallback<UIEventHandler<HTMLDivElement>>(event => {
     setScrollValue(event.currentTarget.scrollLeft);
@@ -64,45 +64,51 @@ const Testimonials: FC = memo(() => {
 
   useInterval(next, 10000);
 
-  // If no testimonials, don't render the section
+  // If no testimonials, don't render
   if (!testimonials.length) {
     return null;
   }
 
   return (
-    <Section noPadding sectionId={SectionId.Testimonials}>
+    <Section sectionId={SectionId.Testimonials}>
       <div
         className={classNames(
           'flex w-full items-center justify-center bg-cover bg-center px-4 py-16 md:py-24 lg:px-8',
           parallaxEnabled && 'bg-fixed',
           {'bg-neutral-700': !imageSrc},
         )}
-        style={imageSrc ? {backgroundImage: `url(${resolveSrc}`} : undefined}>
+        style={imageSrc ? {backgroundImage: `url(${resolveSrc})`} : undefined}>
         <div className="z-10 w-full max-w-screen-md px-4 lg:px-0">
           <div className="flex flex-col items-center gap-y-6 rounded-xl bg-gray-800/60 p-6 shadow-lg">
             <div
-              className="no-scrollbar flex w-full touch-pan-x snap-x snap-mandatory gap-x-6 overflow-x-auto scroll-smooth"
+              ref={scrollContainer}
               onScroll={handleScroll}
-              ref={scrollContainer}>
-              {testimonials.map((testimonial, index) => {
+              className="no-scrollbar flex w-full touch-pan-x snap-x snap-mandatory gap-x-6 overflow-x-auto scroll-smooth">
+              {testimonials.map((testimonialItem, index) => {
                 const isActive = index === activeIndex;
                 return (
-                  <Testimonial isActive={isActive} key={`${testimonial.name}-${index}`} testimonial={testimonial} />
+                  <Testimonial
+                    key={`${testimonialItem.name}-${index}`}
+                    testimonial={testimonialItem}
+                    isActive={isActive}
+                  />
                 );
               })}
             </div>
+
             <div className="flex gap-x-4">
-              {[...Array(testimonials.length)].map((_, index) => {
+              {Array.from({length: testimonials.length}).map((_, index) => {
                 const isActive = index === activeIndex;
                 return (
                   <button
+                    key={`select-button-${index}`}
+                    disabled={isActive}
+                    onClick={setTestimonial(index)}
                     className={classNames(
                       'h-3 w-3 rounded-full bg-gray-300 transition-all duration-500 sm:h-4 sm:w-4',
                       isActive ? 'scale-100 opacity-100' : 'scale-75 opacity-60',
                     )}
-                    disabled={isActive}
-                    key={`select-button-${index}`}
-                    onClick={setTestimonial(index)}></button>
+                  />
                 );
               })}
             </div>
@@ -113,7 +119,7 @@ const Testimonials: FC = memo(() => {
   );
 });
 
-const Testimonial: FC<{testimonial: Testimonial; isActive: boolean}> = memo(
+const Testimonial: FC<{testimonial: TestimonialType; isActive: boolean}> = memo(
   ({testimonial: {text, name, image}, isActive}) => (
     <div
       className={classNames(
@@ -123,14 +129,19 @@ const Testimonial: FC<{testimonial: Testimonial; isActive: boolean}> = memo(
       {image ? (
         <div className="relative h-14 w-14 shrink-0 sm:h-16 sm:w-16">
           <QuoteIcon className="absolute -left-2 -top-2 h-4 w-4 stroke-black text-white" />
-          <img className="h-full w-full rounded-full" src={image} />
+          <img className="h-full w-full rounded-full" src={image} alt={name} />
         </div>
       ) : (
         <QuoteIcon className="h-5 w-5 shrink-0 text-white sm:h-8 sm:w-8" />
       )}
+
       <div className="flex flex-col gap-y-4">
-        <p className="prose prose-sm font-medium italic text-white sm:prose-base">{text}</p>
-        <p className="text-xs italic text-white sm:text-sm md:text-base lg:text-lg">-- {name}</p>
+        <p className="prose prose-sm font-medium italic text-white sm:prose-base">
+          {text}
+        </p>
+        <p className="text-xs italic text-white sm:text-sm md:text-base lg:text-lg">
+          — {name}
+        </p>
       </div>
     </div>
   ),
