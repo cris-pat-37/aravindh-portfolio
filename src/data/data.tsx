@@ -245,3 +245,54 @@ export const socialLinks: Social[] = [
   {label: 'Instagram', Icon: InstagramIcon, href: 'https://www.instagram.com/cris._pat/'},
   {label: 'Twitter', Icon: TwitterIcon, href: ''},
 ];
+/**
+ * Education
+ */
+export const education: TimelineItem[] = [
+  {
+    date: '2025 – 2029',
+    location: 'Aurora Deemed to be University',
+    title: 'B.Tech – Computer Science & Engineering (Data Science)',
+    content: (
+      <p>
+        Pursuing B.Tech in Computer Science with a specialization in Data Science.
+        Actively building automation systems, AI-powered web applications, and
+        strengthening problem-solving skills through continuous DSA practice.
+      </p>
+    ),
+  },
+  {
+    date: '2023 – 2025',
+    location: 'Sri Surya Junior College',
+    title: 'Intermediate (11th & 12th) – PCM Stream',
+    content: (
+      <p>
+        Focused on Physics, Chemistry, and Mathematics, developing strong analytical
+        and logical foundations for engineering studies.
+      </p>
+    ),
+  },
+  {
+    date: '2022 – 2023',
+    location: 'Sri Sai Chaitanya High School',
+    title: 'Secondary School (10th Grade)',
+    content: (
+      <p>
+        Completed secondary education with strong academic discipline and foundational
+        problem-solving skills.
+      </p>
+    ),
+  },
+];
+export {
+  aboutData,
+  contact,
+  education,
+  experience,
+  heroData,
+  homePageMeta,
+  portfolioItems,
+  skills,
+  socialLinks,
+  testimonial,
+};
